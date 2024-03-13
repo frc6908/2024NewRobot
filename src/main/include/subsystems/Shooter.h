@@ -36,6 +36,8 @@
 #include <frc/geometry/Pose2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 
+#include <frc/controller/PIDController.h>
+
 #include "Constants.h"
 
 class Shooter : public frc2::SubsystemBase {
@@ -46,9 +48,27 @@ class Shooter : public frc2::SubsystemBase {
 
   void stop();
 
+  double getEncoder1RPM();
+
+  double getEncoder2RPM();
+
+  double PID1Calculate(double);
+
+  bool PID1finished(); 
+
+  double PID2Calculate(double);
+
+  bool PID2finished(); 
+
   void Periodic() override;
 
  private:
   rev::CANSparkMax shooterMotor1{shooter::kShooterSparkPort1, rev::CANSparkLowLevel::MotorType::kBrushless};   
   rev::CANSparkMax shooterMotor2{shooter::kShooterSparkPort2, rev::CANSparkLowLevel::MotorType::kBrushless}; 
+
+  rev::SparkRelativeEncoder encoder1 = shooterMotor1.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 42);
+  rev::SparkRelativeEncoder encoder2 = shooterMotor2.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 42);
+
+  frc::PIDController shooterPID1{0.01, 0, 0};
+  frc::PIDController shooterPID2{0.01, 0, 0};
 };
