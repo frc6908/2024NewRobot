@@ -6,11 +6,21 @@
 
 Shooter::Shooter() {
     shooterMotor2.SetInverted(1);
+    shooterPID1.SetTolerance(2);
+    shooterPID2.SetTolerance(2);
 }
 
 void Shooter::setShooterMotors(double s1, double s2) {
     shooterMotor1.Set(-s1);
     shooterMotor2.Set(s2);
+}
+
+void Shooter::setShooterMotor1(double s) {
+    shooterMotor1.Set(s);
+}
+
+void Shooter::setShooterMotor2(double s) {
+    shooterMotor2.Set(s);
 }
 
 double Shooter::getEncoder1RPM() {

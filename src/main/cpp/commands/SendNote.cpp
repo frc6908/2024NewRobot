@@ -12,14 +12,11 @@ void SendNote::Initialize() {
 }
 
 void SendNote::Execute() {
-    this->m_shooter->setShooterMotors(-1.0, -1.0);
-    if (t < 50){
-        this->m_intake->stop();
-    }
-    else{
+    this->m_shooter->setShooterMotor1(this->m_shooter->PID1Calculate(80) + 0.00017);
+    this->m_shooter->setShooterMotor2(this->m_shooter->PID2Calculate(80) + 0.00017);
+    if(this->m_shooter->PID1finished() && this->m_shooter->PID2finished()) {
         this->m_intake->setIntakeMotor(1.0);
     }
-    t++;
 }
 
 void SendNote::End(bool interrupted) {

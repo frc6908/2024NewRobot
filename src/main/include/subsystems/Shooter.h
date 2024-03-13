@@ -46,6 +46,10 @@ class Shooter : public frc2::SubsystemBase {
 
   void setShooterMotors(double, double);
 
+  void setShooterMotor1(double);
+
+  void setShooterMotor2(double);
+
   void stop();
 
   double getEncoder1RPM();
