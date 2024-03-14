@@ -47,4 +47,9 @@ namespace shooter {
     const int kShooterSparkPort2 = 6;
 }
 
+namespace vision {
+    const int kTargetHeight = 0; // target height 
+    const int kCameraHeight = 0; // camera height
+    const int kCameraAngle = 0; // camera angle to horizontal
+}
 

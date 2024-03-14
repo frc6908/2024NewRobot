@@ -163,5 +163,7 @@ frc::DifferentialDriveWheelSpeeds Drivetrain::driveRobotRelative(frc::ChassisSpe
 
 
 // This method will be called once per scheduler run
-void Drivetrain::Periodic() {}
+void Drivetrain::Periodic() {
+    frc::SmartDashboard::PutNumber("Drivetrain Orientation", getHeadingAsAngle());
+}
 

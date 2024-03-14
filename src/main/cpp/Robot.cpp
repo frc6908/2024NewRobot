@@ -22,7 +22,6 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-  m_container.GetSmartDashboard();
 }
 
 /**

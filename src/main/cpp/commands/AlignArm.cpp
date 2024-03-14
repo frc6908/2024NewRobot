@@ -9,10 +9,9 @@ void AlignArm::Initialize() {
 }
 
 void AlignArm::Execute() {
-    photon::PhotonPipelineResult res = this->m_vision->getResult();
     double rotation_speed = 0;
-    if(res.HasTargets()) {
-        rotation_speed = this->m_arm->PIDCalculate(res.GetBestTarget().GetPitch()); // replace the interior of the method with data-derived function
+    if(this->m_vision->hasValidTargetPose2d()) {
+        rotation_speed = this->m_arm->PIDCalculate(this->m_vision->getPitch()); // replace the interior of the method with data-derived function
     }
     this->m_arm->setArmMotors(rotation_speed);
 }

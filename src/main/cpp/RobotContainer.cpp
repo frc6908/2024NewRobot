@@ -89,14 +89,6 @@ void RobotContainer::ConfigureButtonBindings() {
   frc::Shuffleboard::GetTab("Autonomous").Add(m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser);
 }
 
-void RobotContainer::GetSmartDashboard() {
-  // frc::Shuffleboard::GetTab("Main Dashboard").Add("Encoder", m_arm.getEncoderDist());
-  // frc::Shuffleboard::GetTab("Main Dashboard").Add("Drivetrain Orientation", m_drivetrain.getHeadingAsAngle());
-  frc::SmartDashboard::PutNumber("Encoder", m_arm.getEncoderDist());
-  frc::SmartDashboard::PutNumber("Drivetrain Orientation", m_drivetrain.getHeadingAsAngle());
-
-}
-
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return m_chooser.GetSelected();

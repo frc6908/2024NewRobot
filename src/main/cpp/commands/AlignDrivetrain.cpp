@@ -10,17 +10,16 @@ void AlignDrivetrain::Initialize() {
 }
 
 void AlignDrivetrain::Execute() {
-    photon::PhotonPipelineResult res = this->m_vision->getResult();
-    double yaw = this->m_drivetrain->getHeadingAsAngle() + res.GetBestTarget().GetYaw();
+    double yaw = this->m_drivetrain->getHeadingAsAngle() + this->m_vision->getHorizontalOffset();
     bool flipped = this->m_drivetrain->isFlipped();
     double rotation_speed = 0;
-    if(res.HasTargets()) {
+    if(this->m_vision->hasValidTargetPose2d()) {
         rotation_speed = (flipped ? 1 : -1) * pid.Calculate(this->m_drivetrain->getHeadingAsAngle(), yaw); // adjust values as needed.
     }
     else {
         rotation_speed = 0.2;
     }
-    frc::SmartDashboard::PutNumber("PID", rotation_speed);
+    frc::SmartDashboard::PutNumber("Rotation Speed", rotation_speed);
     this->m_drivetrain->arcadeDrive(0, rotation_speed);
 }
  

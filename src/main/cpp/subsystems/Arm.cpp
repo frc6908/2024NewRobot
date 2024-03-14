@@ -36,4 +36,6 @@ void Arm::stop() {
     armSpark2.Set(0);
 }
 
-void Arm::Periodic() {}
+void Arm::Periodic() {
+    frc::SmartDashboard::PutNumber("Encoder", getEncoderDist());
+}

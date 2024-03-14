@@ -48,11 +48,27 @@
 class Vision : public frc2::SubsystemBase {
     public: 
         Vision();
-        photon::PhotonPipelineResult getResult();
-        void Periodic() override;
+        
+        double getHorizontalOffset();
 
+        double getVerticalOffset();
+
+        double getArea();
+
+        double getSkew();
+
+        double getDistance();
+
+        double getPitch();
+
+        bool hasValidTargetPose2d();
+
+        /**
+         * Will be called periodically whenever the CommandScheduler runs.
+         */
+        void Periodic() override;
     private: 
-        nt::NetworkTableInstance photonvision = nt::NetworkTableInstance::GetDefault();
-        photon::PhotonCamera camera{"photonvision"};
+        std::shared_ptr<nt::NetworkTable> limelightTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+        frc::ShuffleboardTab& tab = frc::Shuffleboard::GetTab("SmartDashboard");
         frc::AprilTagFieldLayout aprilTagFieldLayout = frc::LoadAprilTagLayoutField(frc::AprilTagField::k2024Crescendo);
 };
