@@ -19,10 +19,16 @@
 using namespace pathplanner;
 
 
-RobotContainer::RobotContainer() : m_drivetrain(){
+RobotContainer::RobotContainer() : m_drivetrain(), m_arm(), m_shooter(), m_intake(), m_vision() {
   // Initialize all of your commands and subsystems here
   // Configure the button bindings
   
+  NamedCommands::registerCommand("Intake Note", std::move(IntakeNote(&m_intake)).ToPtr());
+  NamedCommands::registerCommand("Shoot Note", std::move(SendNote(&m_intake, &m_shooter)).ToPtr());
+  NamedCommands::registerCommand("Arm Down", std::move(MoveArmAngle(&m_arm, 0).ToPtr()));
+  NamedCommands::registerCommand("Reset Arm Encoder", std::move(ResetArmEncoder(&m_arm).ToPtr()));
+
+
   ConfigureButtonBindings();
   // need lambda function to capture the value of the double function for continuous data getting 
   m_drivetrain.SetDefaultCommand(ArcadeDrive(&m_drivetrain, [this] { return -m_joystick.GetY(); }, [this] { return m_joystick.GetX(); }, [this] { return m_joystick.GetThrottle(); }));
