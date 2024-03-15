@@ -6,6 +6,7 @@
 #include "networktables/NetworkTableValue.h"
 
 Arm::Arm() {
+    armSpark1.SetInverted(true);
     pid.SetTolerance(2);
     encoder.SetDistancePerPulse(360.0/2048);
 }

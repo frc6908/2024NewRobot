@@ -89,7 +89,14 @@ void RobotContainer::ConfigureButtonBindings() {
   frc::Shuffleboard::GetTab("Autonomous").Add(m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser);
 }
 
+/*
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return m_chooser.GetSelected();
+}
+*/
+
+frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
+  // An example command will be run in autonomous
+  return PathPlannerAuto("2 Note Center").ToPtr();
 }

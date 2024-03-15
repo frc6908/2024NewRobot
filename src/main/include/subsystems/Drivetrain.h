@@ -37,6 +37,7 @@
 #include <frc/geometry/Pose2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
+#include <frc/kinematics/DifferentialDriveOdometry.h>
 #include <frc/controller/PIDController.h>
 
 #include "Constants.h"
@@ -71,7 +72,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   double getRightEncoderDistance();
 
-  double venomTicksToInches(double);
+  double venomTicksToMeters(double);
 
   bool isFlipped();
 
@@ -85,6 +86,14 @@ class Drivetrain : public frc2::SubsystemBase {
 
   bool TurnPIDIsFinished();
 
+  frc::Pose2d getPose();
+
+  void resetPose(frc::Pose2d);
+
+  frc::ChassisSpeeds getRobotRelativeSpeeds();
+
+  void driveRobotRelative(frc::ChassisSpeeds);
+  
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
@@ -102,7 +111,12 @@ class Drivetrain : public frc2::SubsystemBase {
 
   bool flipped = false;
 
-  
+  frc::DifferentialDriveOdometry m_odometry{gyro.GetRotation2d(), 
+  units::meter_t{0.0254 * M_PI * drivetrain::wheelDiameter * leftVenom.GetPosition() / 10.71}, 
+  units::meter_t{0.0254 * M_PI * drivetrain::wheelDiameter * leftVenom.GetPosition() / 10.71},
+  frc::Pose2d{0_m, 0_m, 0_rad}};
+
+  frc::Pose2d m_pose{0_m, 0_m, 0_rad};
 
   frc::ShuffleboardTab& tab = frc::Shuffleboard::GetTab("Test");
 

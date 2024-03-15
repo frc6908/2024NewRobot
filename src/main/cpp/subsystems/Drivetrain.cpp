@@ -17,6 +17,7 @@
 #include <frc/geometry/Translation2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <frc/DriverStation.h>
 
 #include <units/velocity.h>
 
@@ -29,6 +30,27 @@ Drivetrain::Drivetrain() {
     rightVenom.SetInverted(1);// inverts the right drive motors
     resetGyro();
     resetEncoders();
+
+    
+    AutoBuilder::configureRamsete(
+    [this]() -> frc::Pose2d { return getPose(); },              // Lambda for Robot pose supplier
+    [this](frc::Pose2d pose) { resetPose(pose); },              // Lambda for resetting odometry
+    [this]() -> frc::ChassisSpeeds { return getRobotRelativeSpeeds(); },  // Lambda for ChassisSpeeds supplier (MUST BE ROBOT RELATIVE)
+    [this](frc::ChassisSpeeds speeds) { driveRobotRelative(speeds); },   // Lambda for driving the robot given ROBOT RELATIVE ChassisSpeeds
+    ReplanningConfig(),                                         // Default path replanning config
+        []() {
+            // Boolean supplier that controls when the path will be mirrored for the red alliance
+            // This will flip the path being followed to the red side of the field.
+            // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+            auto alliance = frc::DriverStation::GetAlliance();
+            if (alliance) {
+                return alliance.value() == frc::DriverStation::Alliance::kRed;
+            }
+            return false;
+        },
+    this   
+    ); 
 }
 
 void Drivetrain::setDriveMotors(double left, double right) {
@@ -95,8 +117,8 @@ double Drivetrain::getRightEncoderDistance() {
     return rightVenom.GetPosition();
 }
 
-double Drivetrain::venomTicksToInches(double revolutions) {
-    return M_PI * drivetrain::wheelDiameter * revolutions / 10.71;
+double Drivetrain::venomTicksToMeters(double revolutions) {
+    return 0.0254 * M_PI * drivetrain::wheelDiameter * revolutions / 10.71;
 }
 
 bool Drivetrain::isFlipped() {
@@ -108,7 +130,7 @@ void Drivetrain::resetGyro() {
 }
 
 double Drivetrain::DrivePIDCalculate(double target) {
-    return drivepid.Calculate(venomTicksToInches(getRightEncoderDistance()), target);
+    return drivepid.Calculate(venomTicksToMeters(getRightEncoderDistance()), target);
 }
 
 bool Drivetrain::DrivePIDIsFinished() {
@@ -123,6 +145,38 @@ bool Drivetrain::TurnPIDIsFinished() {
     return turnpid.AtSetpoint();
 }
 
+frc::Pose2d Drivetrain::getPose(){
+    return m_odometry.GetPose();
+}
+
+void Drivetrain::resetPose(frc::Pose2d pose){
+    m_odometry.ResetPosition(gyro.GetRotation2d(), units::length::meter_t(venomTicksToMeters(getLeftEncoderDistance())), 
+    units::length::meter_t(venomTicksToMeters(getRightEncoderDistance())), m_pose);
+}
+
+frc::ChassisSpeeds Drivetrain::getRobotRelativeSpeeds(){
+
+    units::meters_per_second_t speedX{gyro.GetVelocityX()};
+    units::meters_per_second_t speedY{gyro.GetVelocityY()};
+
+    frc::ChassisSpeeds speeds{speedX, -speedY,
+    units::radians_per_second_t(std::numbers::pi)};
+    return frc::ChassisSpeeds(speeds);
+}
+
+void Drivetrain::driveRobotRelative(frc::ChassisSpeeds speeds){
+    frc::DifferentialDriveKinematics kinematics{23_in}; //Change for KOP
+
+    // Convert to wheel speeds. Here, we can use C++17's structured bindings
+    // feature to automatically split the DifferentialDriveWheelSpeeds
+    // struct into left and right velocities.
+    auto [left,right] = kinematics.ToWheelSpeeds(speeds);
+
+    rightVenom.Set(double(right));
+    rightVictor.Set(double(right));
+    leftVenom.Set(double(left));
+    leftVictor.Set(double(left));
+}
 /*
 
 frc::Pose2d Drivetrain::getPose(){
