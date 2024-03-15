@@ -10,11 +10,12 @@ void AlignDrivetrain::Initialize() {
 }
 
 void AlignDrivetrain::Execute() {
-    double yaw = this->m_drivetrain->getHeadingAsAngle() + this->m_vision->getHorizontalOffset();
+    // double yaw = this->m_drivetrain->getHeadingAsAngle() + this->m_vision->getHorizontalOffset();
     bool flipped = this->m_drivetrain->isFlipped();
     double rotation_speed = 0;
     if(this->m_vision->hasValidTargetPose2d()) {
-        rotation_speed = (flipped ? 1 : -1) * pid.Calculate(this->m_drivetrain->getHeadingAsAngle(), yaw); // adjust values as needed.
+        // rotation_speed = (flipped ? 1 : -1) * pid.Calculate(this->m_drivetrain->getHeadingAsAngle(), yaw); // adjust values as needed.
+        rotation_speed = -1 * pid.Calculate(this->m_vision->getHorizontalOffset(), 0);
     }
     else {
         rotation_speed = 0.2;
