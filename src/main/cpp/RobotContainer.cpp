@@ -27,6 +27,8 @@ RobotContainer::RobotContainer() : m_drivetrain(), m_arm(), m_shooter(), m_intak
   NamedCommands::registerCommand("Shoot Note", std::move(SendNote(&m_intake, &m_shooter)).ToPtr());
   NamedCommands::registerCommand("Arm Down", std::move(MoveArmAngle(&m_arm, 0).ToPtr()));
   NamedCommands::registerCommand("Reset Arm Encoder", std::move(ResetArmEncoder(&m_arm).ToPtr()));
+  NamedCommands::registerCommand("Reset Gyro", std::move(ResetGyro(&m_drivetrain).ToPtr()));
+  NamedCommands::registerCommand("Reset Drive Encoders", std::move(ResetDriveEncoders(&m_drivetrain).ToPtr()));
 
 
   ConfigureButtonBindings();
@@ -49,7 +51,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   //Outtake
   frc2::JoystickButton Outtake(&m_joystickArm, 7);
-  Outtake.WhileTrue(new OuttakeNote(&m_intake));
+  Outtake.WhileTrue(new OuttakeNote(&m_intake, &m_shooter));
 
 
 

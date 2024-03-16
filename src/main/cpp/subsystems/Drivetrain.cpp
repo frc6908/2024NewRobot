@@ -31,12 +31,12 @@ Drivetrain::Drivetrain() {
     resetGyro();
     resetEncoders();
 
-    
-    AutoBuilder::configureRamsete(
+    AutoBuilder::configureLTV(
     [this]() -> frc::Pose2d { return getPose(); },              // Lambda for Robot pose supplier
     [this](frc::Pose2d pose) { resetPose(pose); },              // Lambda for resetting odometry
     [this]() -> frc::ChassisSpeeds { return getRobotRelativeSpeeds(); },  // Lambda for ChassisSpeeds supplier (MUST BE ROBOT RELATIVE)
     [this](frc::ChassisSpeeds speeds) { driveRobotRelative(speeds); },   // Lambda for driving the robot given ROBOT RELATIVE ChassisSpeeds
+    0.02_s,
     ReplanningConfig(),                                         // Default path replanning config
         []() {
             // Boolean supplier that controls when the path will be mirrored for the red alliance
@@ -51,6 +51,27 @@ Drivetrain::Drivetrain() {
         },
     this   
     ); 
+
+    
+    // AutoBuilder::configureRamsete(
+    // [this]() -> frc::Pose2d { return getPose(); },              // Lambda for Robot pose supplier
+    // [this](frc::Pose2d pose) { resetPose(pose); },              // Lambda for resetting odometry
+    // [this]() -> frc::ChassisSpeeds { return getRobotRelativeSpeeds(); },  // Lambda for ChassisSpeeds supplier (MUST BE ROBOT RELATIVE)
+    // [this](frc::ChassisSpeeds speeds) { driveRobotRelative(speeds); },   // Lambda for driving the robot given ROBOT RELATIVE ChassisSpeeds
+    // ReplanningConfig(),                                         // Default path replanning config
+    //     []() {
+    //         // Boolean supplier that controls when the path will be mirrored for the red alliance
+    //         // This will flip the path being followed to the red side of the field.
+    //         // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+    //         auto alliance = frc::DriverStation::GetAlliance();
+    //         if (alliance) {
+    //             return alliance.value() == frc::DriverStation::Alliance::kRed;
+    //         }
+    //         return false;
+    //     },
+    // this   
+    // ); 
 }
 
 void Drivetrain::setDriveMotors(double left, double right) {
@@ -151,7 +172,7 @@ frc::Pose2d Drivetrain::getPose(){
 
 void Drivetrain::resetPose(frc::Pose2d pose){
     m_odometry.ResetPosition(gyro.GetRotation2d(), units::length::meter_t(venomTicksToMeters(getLeftEncoderDistance())), 
-    units::length::meter_t(venomTicksToMeters(getRightEncoderDistance())), m_pose);
+    units::length::meter_t(venomTicksToMeters(getRightEncoderDistance())), pose);
 }
 
 frc::ChassisSpeeds Drivetrain::getRobotRelativeSpeeds(){
@@ -219,5 +240,7 @@ frc::DifferentialDriveWheelSpeeds Drivetrain::driveRobotRelative(frc::ChassisSpe
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {
     frc::SmartDashboard::PutNumber("Drivetrain Orientation", getHeadingAsAngle());
+    m_odometry.Update(gyro.GetRotation2d(), units::length::meter_t(venomTicksToMeters(getLeftEncoderDistance())), 
+    units::length::meter_t(venomTicksToMeters(getRightEncoderDistance())));
 }
 

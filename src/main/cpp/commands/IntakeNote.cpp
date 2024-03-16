@@ -9,7 +9,7 @@ void IntakeNote::Initialize() {
 }
 
 void IntakeNote::Execute() {
-    this->m_intake->setIntakeMotor(0.7);
+    this->m_intake->setIntakeMotor(1);
 }
 
 void IntakeNote::End(bool interrupted) {
@@ -17,7 +17,8 @@ void IntakeNote::End(bool interrupted) {
 }
 
 bool IntakeNote::IsFinished() {
-    return this->m_intake->hasNote();
+    // return this->m_intake->hasNote();
+    return false;
 /*
     if(this->m_intake->getDistance() < 300) {
         return true;

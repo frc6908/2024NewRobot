@@ -6,13 +6,13 @@
 #include "networktables/NetworkTableValue.h"
 
 Arm::Arm() {
-    armSpark1.SetInverted(true);
+    // armSpark1.SetInverted(true);
     pid.SetTolerance(2);
     encoder.SetDistancePerPulse(360.0/2048);
 }
 
 void Arm::setArmMotors(double speed) {
-    armSpark1.Set(speed);
+    armSpark1.Set(-speed);
     armSpark2.Set(speed);
 }
 

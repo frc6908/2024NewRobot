@@ -7,12 +7,18 @@
 #include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/Intake.h"
-#include "subsystems/Shooter.h"
+#include "subsystems/Drivetrain.h"
 
-class OuttakeNote : public frc2::CommandHelper<frc2::Command, OuttakeNote> {
+/**
+ * An example command that uses an example subsystem.
+ *
+ * <p>Note that this extends CommandHelper, rather extending CommandBase
+ * directly; this is crucially important, or else the decorator functions in
+ * Command will *not* work!
+ */
+class ResetGyro : public frc2::CommandHelper<frc2::Command, ResetGyro> {
  public:
-  OuttakeNote(Intake*, Shooter*);
+  ResetGyro(Drivetrain*);
 
   void Initialize() override;
 
@@ -23,6 +29,6 @@ class OuttakeNote : public frc2::CommandHelper<frc2::Command, OuttakeNote> {
   bool IsFinished() override;
 
   private:
-    Intake* m_intake;
-    Shooter* m_shooter;
+    Drivetrain* m_drivetrain;
+    double prev;
 };

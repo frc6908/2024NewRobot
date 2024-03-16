@@ -37,6 +37,8 @@
 #include "commands/MoveArm.h"
 #include "commands/MoveArmAngle.h"
 #include "commands/ResetArmEncoder.h"
+#include "commands/ResetDriveEncoders.h"
+#include "commands/ResetGyro.h"
 #include "commands/ShootNote.h"
 #include "commands/AlignArm.h"
 #include "commands/AlignDrivetrain.h"

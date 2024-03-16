@@ -11,7 +11,7 @@ void ScoreAmp::Initialize() {
 }
 
 void ScoreAmp::Execute() {
-    this->m_shooter->setShooterMotors(-0.75, -0.75);
+    this->m_shooter->setShooterMotors(0.5, 0.5);
     this->m_intake->setIntakeMotor(1.0);
 }
 

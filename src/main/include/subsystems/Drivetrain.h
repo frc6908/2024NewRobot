@@ -114,9 +114,7 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::DifferentialDriveOdometry m_odometry{gyro.GetRotation2d(), 
   units::meter_t{0.0254 * M_PI * drivetrain::wheelDiameter * leftVenom.GetPosition() / 10.71}, 
   units::meter_t{0.0254 * M_PI * drivetrain::wheelDiameter * leftVenom.GetPosition() / 10.71},
-  frc::Pose2d{0_m, 0_m, 0_rad}};
-
-  frc::Pose2d m_pose{0_m, 0_m, 0_rad};
+  frc::Pose2d{1.36_m, 5.55_m, 3.14159265_rad}};
 
   frc::ShuffleboardTab& tab = frc::Shuffleboard::GetTab("Test");
 

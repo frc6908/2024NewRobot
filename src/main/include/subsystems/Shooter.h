@@ -56,13 +56,11 @@ class Shooter : public frc2::SubsystemBase {
 
   double getEncoder2RPM();
 
-  double PID1Calculate(double);
+  void PID1Calculate(double);
 
-  bool PID1finished(); 
+  void PID2Calculate(double);
 
-  double PID2Calculate(double);
-
-  bool PID2finished(); 
+  bool inRange(double, double);
 
   void Periodic() override;
 
@@ -73,6 +71,10 @@ class Shooter : public frc2::SubsystemBase {
   rev::SparkRelativeEncoder encoder1 = shooterMotor1.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 42);
   rev::SparkRelativeEncoder encoder2 = shooterMotor2.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 42);
 
-  frc::PIDController shooterPID1{0.01, 0, 0};
-  frc::PIDController shooterPID2{0.01, 0, 0};
+  rev::SparkPIDController shooterPID1 = shooterMotor1.GetPIDController();
+  rev::SparkPIDController shooterPID2 = shooterMotor2.GetPIDController();
+
+  double kp1 = 0.1, ki1 = 0, kd1 = 0, kiz1 = 0, kp2 = 0.1, ki2 = 0, kd2 = 0, kiz2 = 0, kMax = 1, kMin = 0, kFF = 0.000015;
+
+  const double MaxRPM = 5700;
 };

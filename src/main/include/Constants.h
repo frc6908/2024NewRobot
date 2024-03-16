@@ -18,10 +18,10 @@
 
 namespace drivetrain {
     //set vals
-    const int kLeftDriveSparkPort1 = 16;
+    const int kLeftDriveSparkPort1 = 15;
     const int kLeftDriveSparkPort2 = 19;
     
-    const int kRightDriveSparkPort1 = 15;
+    const int kRightDriveSparkPort1 = 16;
     const int kRightDriveSparkPort2 = 18;
 
     const int wheelDiameter = 6; //inches 
