@@ -1,12 +1,6 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 1.36086297850199,
-      "y": 5.539225686154654
-    },
-    "rotation": 0
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
@@ -24,13 +18,13 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "CenterNote"
+                  "pathName": "LeftNote"
                 }
               },
               {
@@ -45,7 +39,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterToSpeaker"
+            "pathName": "LefttoSpeaker"
           }
         },
         {
@@ -57,7 +51,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterNote"
+            "pathName": "LeftNote"
           }
         }
       ]
