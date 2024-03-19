@@ -113,7 +113,7 @@ frc::Rotation2d Drivetrain::getHeading() {
 }
 
 double Drivetrain::getHeadingAsAngle() {
-    return fmod(fmod(getHeading().Degrees().value(), 360) + 360, 360) - 180;
+    return getHeading().Degrees().value();
 }
 
 frc::Rotation2d Drivetrain::getPitch() {
@@ -139,7 +139,8 @@ double Drivetrain::getRightEncoderDistance() {
 }
 
 double Drivetrain::venomTicksToMeters(double revolutions) {
-    return 0.0254 * M_PI * drivetrain::wheelDiameter * revolutions / 10.71;
+    return 0.0254 * M_PI * drivetrain::wheelDiameter * revolutions / 8.45;
+    // 10.71
 }
 
 bool Drivetrain::isFlipped() {
