@@ -12,7 +12,7 @@ TwoPiece::TwoPiece(Drivetrain* drivetrain, Shooter* shooter, Arm* arm, Intake* i
 }
 
 void TwoPiece::Initialize() {
-    t = 0, k = 0;
+    t = 0, k = 0;  
     this->m_drivetrain->stop();
 }
 
