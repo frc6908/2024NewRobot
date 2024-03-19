@@ -28,6 +28,7 @@
 #include "commands/AmpAuto.h"
 #include "commands/TwoPieceR.h"
 #include "commands/ThreePiece.h"
+#include "commands/TwoNoteCenter.h"
 
 
 #include "commands/ArcadeDrive.h"

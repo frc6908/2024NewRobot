@@ -113,7 +113,7 @@ frc::Rotation2d Drivetrain::getHeading() {
 }
 
 double Drivetrain::getHeadingAsAngle() {
-    return getHeading().Degrees().value();
+    return fmod(fmod(getHeading().Degrees().value(), 360) + 360, 360) - 180;
 }
 
 frc::Rotation2d Drivetrain::getPitch() {

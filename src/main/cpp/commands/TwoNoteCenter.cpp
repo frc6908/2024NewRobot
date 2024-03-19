@@ -23,35 +23,45 @@ void TwoNoteCenter::Execute() {
     else if(t > 100 && t <= 150) {
         this->m_intake->setIntakeMotor(1.0);
     }
-    else if(t > 150 && t <= 250) {
+    else if(t > 150 && t <= 200) {
+        this->m_shooter->setShooterMotors(-0.1, -0.1);
+    }
+    else if(t > 200 && t <= 300) {
         this->m_intake->stop();
         this->m_shooter->stop();
-        this->m_drivetrain->setDriveMotors(0.2, 0.2);
+        this->m_drivetrain->setDriveMotors(0.5, 0.5);
         this->m_intake->setIntakeMotor(1);
     }
-    else if(t > 250 && t <= 260) {
+    else if(t > 300 && t <= 310) {
         this->m_drivetrain->stop();
         this->m_intake->setIntakeMotor(-0.3);
         this->m_shooter->setShooterMotors(-0.5, -0.5);
     }
-    else if(t > 260 && t <= 360) {
+    else if(t > 310 && t <= 410) {
         this->m_intake->stop();
         this->m_shooter->stop();
-        this->m_drivetrain->setDriveMotors(-0.2, -0.2);
+        this->m_drivetrain->setDriveMotors(-0.5, -0.5);
     }
-    else if(t > 360 && t <= 460) {
+    else if(t > 410 && t <= 510) {
         this->m_drivetrain->stop();
         this->m_shooter->setShooterMotors(1, 1);
     }
-    else if(t > 460 && t <= 510) {
+    else if(t > 510 && t <= 560) {
         this->m_intake->setIntakeMotor(1);
     }
-    else if(t > 510) {
+    else if(t > 560 && t <= 660) {
+        this->m_drivetrain->setDriveMotors(0.5, 0.5);
+        this->m_intake->stop();
+        this->m_shooter->stop();
+        this->m_arm->stop();
+    }
+    else {
         this->m_drivetrain->stop();
         this->m_intake->stop();
         this->m_shooter->stop();
         this->m_arm->stop();
     }
+    t++;
 }
 
 void TwoNoteCenter::End(bool interrupted) {

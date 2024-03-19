@@ -106,5 +106,5 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return PathPlannerAuto("2 Note Center").ToPtr();
+  return TwoNoteCenter(&m_drivetrain, &m_shooter, &m_arm, &m_intake).ToPtr();
 }

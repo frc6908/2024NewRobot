@@ -15,7 +15,16 @@ void TurnDegrees::Initialize() {
 }
 
 void TurnDegrees::Execute() {
-    this->m_drivetrain->arcadeDrive(0, this->m_drivetrain->TurnPIDCalculate(target));
+    double a = this->m_drivetrain->TurnPIDCalculate(target);
+    if(a < 0) {
+        a -= 0.28;
+        a = std::max(a, -1.0);
+    }
+    else {
+        a += 0.28;
+        a = std::min(a, 1.0);
+    }
+    this->m_drivetrain->arcadeDrive(0, -a);
 }
 
 void TurnDegrees::End(bool interrupted) {
