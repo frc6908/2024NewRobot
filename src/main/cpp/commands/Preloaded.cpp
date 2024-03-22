@@ -20,31 +20,29 @@ void Preloaded::Initialize() {
 }
 
 void Preloaded::Execute() {
-    if(t <= 60) {
-        this->m_arm->setArmMotors(0.5);
-    }
-    if(t >= 150 && t <= 200) {
-        this->m_arm->stop();
-        if(t == 150) {
-            this->m_arm->resetEncoder();
+    if(t >= 0 && t <= 100) {
+        if(t < 25) { // ****** TUNE THIS VALUE SO THAT ARM GOES ALL THE WAY DOWN ******
+            this->m_arm->setArmMotors(0.5);
         }
-        this->m_shooter->setShooterMotors(-1, -1);
+        else {
+            this->m_arm->stop();
+        }
+        this->m_shooter->setShooterMotors(1, 1);
     }
-    else if(t <= 225) {
+    else if(t > 100 && t <= 150) {
         this->m_intake->setIntakeMotor(1.0);
     }
-    else if(t <= 275) {
-        this->m_shooter->stop();
-        this->m_intake->stop();
-        this->m_drivetrain->setDriveMotors(0.4, 0.4);
-    }
-    else{
+    else {
         this->m_drivetrain->stop();
+        this->m_intake->stop();
+        this->m_shooter->stop();
+        this->m_arm->stop();
     }
     t++;
 }
 
 void Preloaded::End(bool interrupted) {
+    this->m_arm->resetEncoder();
     this->m_drivetrain->stop();
     this->m_shooter->stop();
     this->m_arm->stop();

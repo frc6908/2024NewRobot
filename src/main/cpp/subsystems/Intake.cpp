@@ -29,4 +29,6 @@ bool Intake::hasNote() {
     return true; 
 }
 
-void Intake::Periodic() {}
+void Intake::Periodic() {
+    frc::SmartDashboard::PutBoolean("HasNote", hasNote());
+}

@@ -88,11 +88,12 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
   m_chooser.SetDefaultOption("Slow Auto", &m_slowauto);
-  m_chooser.AddOption("Preloaded Mobility - Center/Right", &m_preloaded);
-  m_chooser.AddOption("Two Piece Auto - Center", &m_twopiece);
+  m_chooser.AddOption("Preloaded", &m_preloaded);
+  m_chooser.AddOption("Preloaded Mobility", &m_preloadedmobility);
+  m_chooser.AddOption("Two Piece Auto - Center", &m_twonotecenter);
   // m_chooser.AddOption("Amp Auton", &m_ampauto);
-  m_chooser.AddOption("Two Piece Auto - Right", &m_twopieceR);
-  m_chooser.AddOption("Three Piece Auto - Center", &m_threepiece);
+  // m_chooser.AddOption("Two Piece Auto - Right", &m_twopieceR);
+  // m_chooser.AddOption("Three Piece Auto - Center", &m_threepiece);
 
   frc::Shuffleboard::GetTab("Autonomous").Add(m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser);
 }
@@ -104,7 +105,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 }
 */
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
+frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return TwoNoteCenter(&m_drivetrain, &m_shooter, &m_arm, &m_intake).ToPtr();
+  return m_chooser.GetSelected();
 }

@@ -8,6 +8,8 @@
 #include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Shooter.h"
+#include "subsystems/Intake.h"
 #include "subsystems/Arm.h"
 
 /**
@@ -17,9 +19,9 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class SlowAuto : public frc2::CommandHelper<frc2::Command, SlowAuto> {
+class PreloadedMobility : public frc2::CommandHelper<frc2::Command, PreloadedMobility> {
  public:
-  SlowAuto(Drivetrain*, Arm*);
+  PreloadedMobility(Drivetrain*, Shooter*, Arm*, Intake*);
 
   void Initialize() override;
 
@@ -32,5 +34,7 @@ class SlowAuto : public frc2::CommandHelper<frc2::Command, SlowAuto> {
   private:
     int t;
     Drivetrain* m_drivetrain;
+    Shooter* m_shooter;
     Arm* m_arm;
+    Intake* m_intake;
 };

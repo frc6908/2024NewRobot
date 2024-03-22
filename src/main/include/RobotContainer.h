@@ -28,6 +28,7 @@
 #include "commands/AmpAuto.h"
 #include "commands/TwoPieceR.h"
 #include "commands/ThreePiece.h"
+#include "commands/PreloadedMobility.h"
 #include "commands/TwoNoteCenter.h"
 
 
@@ -58,8 +59,8 @@
 class RobotContainer {
  public:
   RobotContainer();
-  // frc2::Command* GetAutonomousCommand();
-  frc2::CommandPtr GetAutonomousCommand();
+  frc2::Command* GetAutonomousCommand();
+  // frc2::CommandPtr GetAutonomousCommand();
 
  private:
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -82,13 +83,14 @@ class RobotContainer {
 
    // chooser for autonomous routines
   frc::SendableChooser<frc2::Command*> m_chooser;
-  SlowAuto m_slowauto{&m_drivetrain};
+  SlowAuto m_slowauto{&m_drivetrain, &m_arm};
   TwoPiece m_twopiece{&m_drivetrain, &m_shooter, &m_arm, &m_intake};
   Preloaded m_preloaded{&m_drivetrain, &m_shooter, &m_arm, &m_intake};
   AmpAuto m_ampauto{&m_drivetrain};
   TwoPieceR m_twopieceR{&m_drivetrain, &m_shooter, &m_arm, &m_intake};
   ThreePiece m_threepiece{&m_drivetrain, &m_shooter, &m_arm, &m_intake};
-  
+  TwoNoteCenter m_twonotecenter{&m_drivetrain, &m_shooter, &m_arm, &m_intake};
+  PreloadedMobility m_preloadedmobility{&m_drivetrain, &m_shooter, &m_arm, &m_intake};
 
   
   //joystick
