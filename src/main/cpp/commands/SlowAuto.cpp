@@ -16,13 +16,10 @@ void SlowAuto::Initialize() {
 }
 
 void SlowAuto::Execute() {
-    if(t <= 100) {
-        if(t < 25) { // ****** TUNE THIS VALUE SO THAT ARM GOES ALL THE WAY DOWN ******
-            this->m_arm->setArmMotors(0.5);
-        }
-        else {
-            this->m_arm->stop();
-        }
+    if(t >= 0 && t < 25) { // ****** TUNE THIS SECOND T VALUE SO THAT ARM GOES ALL THE WAY DOWN ****** 
+        this->m_arm->setArmMotors(0.5);
+    }
+    else if(t > 65 && t <= 165) {
         this->m_drivetrain->setDriveMotors(0.4, 0.4);
     }
     else {

@@ -20,23 +20,21 @@ void PreloadedMobility::Initialize() {
 }
 
 void PreloadedMobility::Execute() {
-    if(t >= 0 && t <= 100) {
-        if(t < 25) { // ****** TUNE THIS VALUE SO THAT ARM GOES ALL THE WAY DOWN ******
-            this->m_arm->setArmMotors(0.5);
-        }
-        else {
-            this->m_arm->stop();
-        }
+    if(t >= 0 && t < 25) { // ****** TUNE THIS SECOND T VALUE SO THAT ARM GOES ALL THE WAY DOWN ****** 
+        this->m_arm->setArmMotors(0.5);
+    }
+    else if(t >= 65 && t <= 165) {
+        this->m_arm->stop();
         this->m_shooter->setShooterMotors(1, 1);
     }
-    else if(t > 100 && t <= 150) {
+    else if(t > 165 && t <= 215) {
         this->m_intake->setIntakeMotor(1.0);
     }
-    else if(t > 150 && t <= 200) {
+    else if(t > 215 && t <= 265) {
         this->m_intake->stop();
         this->m_shooter->setShooterMotors(-0.1, -0.1);
     }
-    else if(t > 200 && t <= 300) {
+    else if(t > 265 && t <= 365) {
         this->m_shooter->stop();
         this->m_drivetrain->setDriveMotors(0.5, 0.5);
         // this->m_intake->setIntakeMotor(1);
