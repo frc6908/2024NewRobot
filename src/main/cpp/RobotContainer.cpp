@@ -50,7 +50,7 @@ void RobotContainer::ConfigureButtonBindings() {
   Intake.WhileTrue(new IntakeNote(&m_intake));
 
   //Outtake
-  frc2::JoystickButton Outtake(&m_joystickArm, 7);
+  frc2::JoystickButton Outtake(&m_joystickArm, 2);
   Outtake.WhileTrue(new OuttakeNote(&m_intake, &m_shooter));
 
 
@@ -67,24 +67,24 @@ void RobotContainer::ConfigureButtonBindings() {
   armDown.WhileTrue(new MoveArm(&m_arm, true, 0.5)); 
   frc2::JoystickButton armUp(&m_joystickArm, 5);
   armUp.WhileTrue(new MoveArm(&m_arm, false, 0.5));
-  frc2::JoystickButton resetEncoder(&m_joystickArm, 11);
-  resetEncoder.WhileTrue(new ResetArmEncoder(&m_arm));
+  //frc2::JoystickButton resetEncoder(&m_joystickArm, 11);
+  //resetEncoder.WhileTrue(new ResetArmEncoder(&m_arm));
 
-  frc2::JoystickButton maintainArm(&m_joystickArm, 2);
+  frc2::JoystickButton maintainArm(&m_joystickArm, 7);
   maintainArm.WhileTrue(new MaintainArm(&m_arm));
   // Alignment
 
   
   // frc2::JoystickButton alignArm(&m_joystick, 7);
   // alignArm.WhileTrue(new AlignArm(&m_arm, &m_vision));
-  frc2::JoystickButton alignDT(&m_joystick, 11);
-  alignDT.WhileTrue(new AlignDrivetrain(&m_drivetrain, &m_vision));
-  frc2::JoystickButton alignAmp(&m_joystickArm, 6);
-  alignAmp.WhileTrue(new MoveArmAngle(&m_arm, 96));
-  frc2::JoystickButton alignIntake(&m_joystickArm, 4);
-  alignIntake.WhileTrue(new MoveArmAngle(&m_arm, 0));
-  frc2::JoystickButton alignStart(&m_joystickArm, 9);
-  alignStart.WhileTrue(new MoveArmAngle(&m_arm, 70)); // change value
+  //frc2::JoystickButton alignDT(&m_joystick, 11);
+  //alignDT.WhileTrue(new AlignDrivetrain(&m_drivetrain, &m_vision));
+  //frc2::JoystickButton alignAmp(&m_joystickArm, 6);
+  //alignAmp.WhileTrue(new MoveArmAngle(&m_arm, 96));
+  //frc2::JoystickButton alignIntake(&m_joystickArm, 4);
+  //alignIntake.WhileTrue(new MoveArmAngle(&m_arm, 0));
+  //frc2::JoystickButton alignStart(&m_joystickArm, 9);
+  //alignStart.WhileTrue(new MoveArmAngle(&m_arm, 70)); // change value
 
 
   m_chooser.SetDefaultOption("Slow Auto", &m_slowauto);

@@ -17,7 +17,7 @@ void SlowAuto::Initialize() {
 
 void SlowAuto::Execute() {
     if(t >= 0 && t < 25) { // ****** TUNE THIS SECOND T VALUE SO THAT ARM GOES ALL THE WAY DOWN ****** 
-        this->m_arm->setArmMotors(0.5);
+        this->m_arm->setArmMotors(1);
     }
     else if(t > 65 && t <= 165) {
         this->m_drivetrain->setDriveMotors(0.4, 0.4);
