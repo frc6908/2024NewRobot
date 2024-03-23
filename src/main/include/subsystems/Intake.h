@@ -55,7 +55,7 @@ class Intake : public frc2::SubsystemBase {
         static constexpr frc::Color kBlueTarget = frc::Color(0, 0, 255);
         static constexpr frc::Color kGreenTarget = frc::Color(0, 255, 0);
         static constexpr frc::Color kRedTarget = frc::Color(255, 0, 0);
-        static constexpr frc::Color kYellowTarget = frc::Color(255, 69, 0);
+        static constexpr frc::Color kOrangeTarget = frc::Color(255, 69, 0);
 
         rev::ColorMatch m_colorMatcher;
 
