@@ -18,8 +18,8 @@ void MoveArm::Execute() {
     frc::SmartDashboard::PutNumber("Encoder", this->m_arm->getEncoderDist());
     // Scale throttle based on distance from maximum (Implemented by Kavin 2024-04-23 @ 3:25PM)
     double delta = 10; // Buffer zone (in degrees)
-    double min_error = this->m_arm->getEncoderDist() - 0; // Arm distance from minimum position
-    double max_error = 97 - this->m_arm->getEncoderDist(); // Arm distance from maximum position
+    double min_error = abs(this->m_arm->getEncoderDist() - 0); // Arm distance from minimum position
+    double max_error = abs(97 - this->m_arm->getEncoderDist()); // Arm distance from maximum position
     if(dir && 0 <= min_error <= delta){
         this->m_arm->setArmMotors((min_error/delta)*throttle); // As arm approaches the minimum position, linearly scale the throttle input
     }
