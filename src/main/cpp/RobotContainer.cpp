@@ -59,7 +59,7 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton Shooter(&m_joystickArm, 1);
   // Shooter.WhileTrue(new ShootNote(&m_shooter));
   Shooter.WhileTrue(new SendNote(&m_intake, &m_shooter));
-  frc2::JoystickButton AmpShooter(&m_joystickArm, 8);
+  frc2::JoystickButton AmpShooter(&m_joystickArm, 10);
   AmpShooter.WhileTrue(new ScoreAmp(&m_intake, &m_shooter));
 
   //Arm Manual UNTESTED
@@ -70,7 +70,7 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton resetEncoder(&m_joystickArm, 11);
   resetEncoder.WhileTrue(new ResetArmEncoder(&m_arm));
 
-  frc2::JoystickButton maintainArm(&m_joystickArm, 7);
+  frc2::JoystickButton maintainArm(&m_joystickArm, 8);
   maintainArm.WhileTrue(new MaintainArm(&m_arm));
   // Alignment
 

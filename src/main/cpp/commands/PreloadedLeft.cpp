@@ -20,28 +20,31 @@ void PreloadedLeft::Initialize() {
 }
 
 void PreloadedLeft::Execute() {
-    if(t <= 60) {
-        this->m_arm->setArmMotors(0.5);
-    }
-    if(t >= 150 && t <= 200) {
-        this->m_arm->stop();
-        if(t == 150) {
+    if(t >= 0 && t <= 100) {
+        if(t <25){
+            this->m_arm->setArmMotors(0.5);
+        }
+        else if(t <= 50) {
             this->m_arm->resetEncoder();
         }
-        this->m_shooter->setShooterMotors(-1, -1);
+        else{
+            this->m_arm->stop();
+        }
+        
+        this->m_shooter->setShooterMotors(1, 1);
     }
-    else if(t <= 225) {
+    else if(t > 100 && t <= 150) {
         this->m_intake->setIntakeMotor(1.0);
     }
-    else if(t <= 270) {
-        this->m_shooter->stop();
+    else if(t > 150 && t <= 200) {
+        this->m_shooter->setShooterMotors(-0.1, -0.1);
+    }
+    else if(t > 200 && t <= 300) {
         this->m_intake->stop();
-        this->m_drivetrain->setDriveMotors(0.4, -0.4);
+        this->m_shooter->stop();
+        this->m_drivetrain->setDriveMotors(0.5, 0.5);
     }
-    else if(t <= 320) {
-        this->m_drivetrain->setDriveMotors(0.4, 0.4);
-    }
-    else{
+    else {
         this->m_drivetrain->stop();
     }
     t++;
