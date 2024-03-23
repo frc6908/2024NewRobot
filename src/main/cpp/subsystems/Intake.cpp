@@ -23,7 +23,7 @@ void Intake::stop() {
 bool Intake::hasNote() {
     double confidence = 0.0;
     frc::Color matchedColor = m_colorMatcher.MatchClosestColor(m_colorSensor.GetColor(), confidence);
-    if (matchedColor != kBlueTarget) {
+    if (matchedColor == kBlueTarget) {
         return false;
     }
     return true; 
