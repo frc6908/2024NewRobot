@@ -44,6 +44,9 @@ bool Intake::hasNote() {
 
 void Intake::Periodic() {
     frc::SmartDashboard::PutBoolean("HasNote", hasNote());
+    frc::SmartDashboard::PutNumber("R", m_colorSensor.GetColor().red);
+    frc::SmartDashboard::PutNumber("G", m_colorSensor.GetColor().green);
+    frc::SmartDashboard::PutNumber("B", m_colorSensor.GetColor().blue);
     frc::SmartDashboard::PutString("Color", colorstr);
     // frc::SmartDashboard::PutNumber("Sensor Distance", m_colorSensor.GetIR());
 }
