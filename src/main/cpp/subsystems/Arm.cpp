@@ -21,7 +21,7 @@ void Arm::resetEncoder() {
 }
 
 double Arm::getEncoderDist() {
-    return encoder.GetDistance();
+    return -encoder.GetDistance();
 }
 
 double Arm::PIDCalculate(double target) {

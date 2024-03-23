@@ -43,24 +43,25 @@ void TwoNoteCenter::Execute() {
         this->m_intake->setIntakeMotor(-0.3);
         this->m_shooter->setShooterMotors(-0.5, -0.5);
     }
-    else if(t > 375 && t <= 475) {
+    else if(t > 375 && t <= 485) {
         this->m_intake->stop();
         this->m_shooter->stop();
         this->m_drivetrain->setDriveMotors(-0.5, -0.5);
     }
-    else if(t > 475 && t <= 575) {
+    else if(t > 485 && t <= 585) {
         this->m_drivetrain->stop();
         this->m_shooter->setShooterMotors(1, 1);
     }
-    else if(t > 575 && t <= 625) {
+    else if(t > 585 && t <= 635) {
         this->m_intake->setIntakeMotor(1);
     }
-    else if(t > 625 && t <= 725) {
+    else if(t > 635 && t <= 735) {
         this->m_drivetrain->setDriveMotors(0.5, 0.5);
         this->m_intake->stop();
         this->m_shooter->stop();
         this->m_arm->stop();
     }
+
     else {
         this->m_drivetrain->stop();
         this->m_intake->stop();
