@@ -29,6 +29,7 @@ void Preloaded::Execute() {
     }
     else if(t > 165 && t <= 215) {
         this->m_intake->setIntakeMotor(1.0);
+        this->m_shooter->setShooterMotors(1, 1);
     }
     else {
         this->m_drivetrain->stop();

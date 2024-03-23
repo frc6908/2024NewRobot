@@ -26,10 +26,11 @@ void PreloadedMobility::Execute() {
     }
     else if(t >= 65 && t <= 165) {
         this->m_arm->stop();
-        
+        this->m_shooter->setShooterMotors(1, 1);    
     }
     else if(t > 165 && t <= 215) {
         this->m_intake->setIntakeMotor(1.0);
+        this->m_shooter->setShooterMotors(1, 1);    
     }
     else if(t > 215 && t <= 265) {
         this->m_intake->stop();
