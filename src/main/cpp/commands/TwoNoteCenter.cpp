@@ -54,7 +54,7 @@ void TwoNoteCenter::Execute() {
     }
     else if(t > 585 && t <= 635) {
         this->m_intake->setIntakeMotor(1);
-         this->m_shooter->setShooterMotors(1, 1);git c
+         this->m_shooter->setShooterMotors(1, 1);
     }
 
     else {

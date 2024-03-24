@@ -7,6 +7,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <cameraserver/CameraServer.h>
 #include <frc2/command/CommandScheduler.h>
+#include <frc2/command/RepeatCommand.h>
 
 void Robot::RobotInit() {
   frc::CameraServer::StartAutomaticCapture();
