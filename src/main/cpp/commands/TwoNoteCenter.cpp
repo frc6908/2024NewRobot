@@ -35,7 +35,7 @@ void TwoNoteCenter::Execute() {
     }
     else if(t > 265 && t <= 365) {
         this->m_shooter->stop();
-        this->m_drivetrain->setDriveMotors(0.5, 0.5);
+        this->m_drivetrain->setDriveMotors(0.4, 0.4);
         this->m_intake->setIntakeMotor(1);
     }
     else if(t > 365 && t <= 375) {
