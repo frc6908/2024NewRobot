@@ -67,7 +67,7 @@ void RobotContainer::ConfigureButtonBindings() {
   armDown.WhileTrue(new MoveArm(&m_arm, true, 0.5)); 
   frc2::JoystickButton armUp(&m_joystickArm, 5);
   armUp.WhileTrue(new MoveArm(&m_arm, false, 0.5));
-  frc2::JoystickButton resetEncoder(&m_joystickArm, 11);
+  frc2::JoystickButton resetEncoder(&m_joystickArm, 12);
   resetEncoder.WhileTrue(new ResetArmEncoder(&m_arm));
 
   frc2::JoystickButton maintainArm(&m_joystickArm, 8);
