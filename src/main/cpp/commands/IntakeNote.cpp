@@ -17,7 +17,7 @@ void IntakeNote::End(bool interrupted) {
 }
 
 bool IntakeNote::IsFinished() {
-    // return this->m_intake->hasNote();
+    //return this->m_intake->hasNote();
     return false;
 /*
     if(this->m_intake->getDistance() < 300) {
