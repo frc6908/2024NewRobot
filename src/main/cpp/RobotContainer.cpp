@@ -63,7 +63,7 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton AmpShooter(&m_joystickArm, 10);
   AmpShooter.WhileTrue(new ScoreAmp(&m_intake, &m_shooter));
 
-  //Arm Manual
+  //Arm Manual 
   frc2::JoystickButton armDown(&m_joystickArm, 3);
   //armDown.WhileTrue(new frc2::RepeatCommand(new MoveArm(&m_arm, true, 0.5)));
   armDown.WhileTrue(new MoveArm(&m_arm, true, 0.5)); 
