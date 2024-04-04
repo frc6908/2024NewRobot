@@ -12,9 +12,9 @@ void SendNote::Initialize() {
 }
 
 void SendNote::Execute() {
-    this->m_shooter->setShooterMotors(1, 1);
+    this->m_shooter->setShooterMotors(0.5, 0.5);
     if(t > 30) {
-        this->m_intake->setIntakeMotor(1.0);
+        this->m_intake->setIntakeMotor(0.5);
     }
     t++;
 }
