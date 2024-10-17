@@ -4,10 +4,9 @@
 
 #include "commands/Preloaded.h"
 
-Preloaded::Preloaded(Drivetrain* drivetrain, Shooter* shooter, Arm* arm, Intake* intake) : m_drivetrain{drivetrain}, m_shooter{shooter}, m_arm{arm}, m_intake{intake} {
+Preloaded::Preloaded(Drivetrain* drivetrain, Shooter* shooter, Intake* intake) : m_drivetrain{drivetrain}, m_shooter{shooter}, m_intake{intake} {
     AddRequirements(drivetrain); 
     AddRequirements(shooter);
-    AddRequirements(arm);
     AddRequirements(intake);
 }
 
@@ -15,19 +14,16 @@ void Preloaded::Initialize() {
     t = 0;
     this->m_drivetrain->stop();
     this->m_shooter->stop();
-    this->m_arm->stop();
     this->m_intake->stop();
 }
 
 void Preloaded::Execute() {
 
        if(t >= 0 && t < 25) { // ****** TUNE THIS SECOND T VALUE SO THAT ARM GOES ALL THE WAY DOWN ****** 
-        this->m_arm->setArmMotors(1);
         this->m_shooter->setShooterMotors(1, 1);
     }
     else if(t >= 65 && t <= 165) {
         this->m_shooter->setShooterMotors(1, 1);
-        this->m_arm->stop();
         
     }
     else if(t > 165 && t <= 215) {
@@ -41,7 +37,6 @@ void Preloaded::Execute() {
         this->m_drivetrain->stop();
         this->m_intake->stop();
         this->m_shooter->stop();
-        this->m_arm->stop();
     }
     t++;
 }
@@ -49,7 +44,6 @@ void Preloaded::Execute() {
 void Preloaded::End(bool interrupted) {
     this->m_drivetrain->stop();
     this->m_shooter->stop();
-    this->m_arm->stop();
     this->m_intake->stop();
 }
 
