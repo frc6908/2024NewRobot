@@ -101,7 +101,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
  private:
 
-  ctre::phoenix::motorcontrol::can::WPI_VictorSPX leftVictor{drivetrain::kLeftDriveSparkPort1};
+  ctre::phoenix::motorcontrol::can::WPI_TalonSRX leftVictor{drivetrain::kLeftDriveSparkPort1};
   frc::CANVenom leftVenom{drivetrain::kLeftDriveSparkPort2};
 
   ctre::phoenix::motorcontrol::can::WPI_VictorSPX rightVictor{drivetrain::kRightDriveSparkPort1};
